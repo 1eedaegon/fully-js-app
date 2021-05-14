@@ -3,20 +3,18 @@ import dotenv from "dotenv";
 import { ApolloServer, gql } from "apollo-server-express";
 
 import db from "./db.js";
+import models from "./models/index.js";
 
 dotenv.config();
-const app = express();
 const PORT = process.env.PORT || 3000;
-const DB_HOST = process.env.DB_HOST;
+const DB_CONN = process.env.DB_CONN || process.env.DB_HOST;
 
-db.connect(DB_HOST);
-
-// Note entity and example: notes: [Note]
-let notes = [
-  { id: "1", content: "나는 짱짱ㅁ맨", author: "gon" },
-  { id: "2", content: "개발을 잘하고  싶어", author: "dino" },
-  { id: "3", content: "잘보이고 싶어", author: "swttrp" },
-];
+// Note entity and example: notes!: [Note]
+// let notes = [
+//   { id: "1", content: "나는 짱짱ㅁ맨", author: "gon" },
+//   { id: "2", content: "개발을 잘하고  싶어", author: "dino" },
+//   { id: "3", content: "잘보이고 싶어", author: "swttrp" },
+// ];
 
 // GQL
 // Caution! Type of ID is String
@@ -38,21 +36,21 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     Hello: () => "Hello world!",
-    notes: () => notes,
-    note: (parent, args) => notes.find((note) => note.id === args.id),
+    notes: async () => await models.Note.find(),
+    note: async (parent, args) => await models.Note.findById(args.id),
   },
   Mutation: {
-    newNote: (parent, args) => {
-      const note = {
-        id: String(notes.length + 1),
+    newNote: async (parent, args) => {
+      return await models.Note.create({
         content: args.content,
-        author: "gon",
-      };
-      notes.push(note);
-      return note;
+        author: "Gon",
+      });
     },
   },
 };
+
+const app = express();
+db.connect(DB_CONN);
 const server = new ApolloServer({ typeDefs, resolvers });
 server.applyMiddleware({ app, path: "/api" });
 
