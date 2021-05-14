@@ -17,7 +17,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   // Make context how resolvers refer to models
-  context: () => models,
+  // Must be eager execution using '()'
+  context: () => ({ models }),
 });
 // Accept apollo graphql middleware
 server.applyMiddleware({ app, path: "/api" });
