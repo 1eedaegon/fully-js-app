@@ -1,3 +1,4 @@
+// For CommonJS
 import Note from "./note.js";
 const models = {
   Note,
