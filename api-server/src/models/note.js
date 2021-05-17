@@ -7,13 +7,14 @@ const noteSchema = new mongoose.Schema(
       required: true,
     },
     author: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
   },
   { timestamps: true }
 );
 // Schema => Model
-const Note = mongoose.model("model", noteSchema);
+const Note = mongoose.model("note", noteSchema);
 
 export default Note;

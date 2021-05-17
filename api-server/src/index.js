@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import { ApolloServer } from "apollo-server-express";
 
 import db from "./db.js";
@@ -11,14 +12,27 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const DB_CONN = process.env.DB_CONN || process.env.DB_HOST;
 
+const getUser = (token) => {
+  if (token) {
+    try {
+      return jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      throw new Error("[ERROR]: Session invalid.");
+    }
+  }
+};
 const app = express();
 db.connect(DB_CONN);
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   // Make context how resolvers refer to models
-  // Must be eager execution using '()'
-  context: () => ({ models }),
+  // Must be *Object lieteral*
+  context: ({ req }) => {
+    const token = req.headers.authorization;
+    const user = getUser(token);
+    return { models, user };
+  },
 });
 // Accept apollo graphql middleware
 server.applyMiddleware({ app, path: "/api" });

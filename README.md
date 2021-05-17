@@ -2,8 +2,13 @@
 
 > Full-stack app made with Javascript
 
-- [x] Note CRUD each user
-- [ ] Read other Note
-- [ ] Sign up / Login
-- [ ] Seach profile other user
-- [ ] Bookmark
+### Server
+  - [x] Note CRUD each user
+  - [ ] Read other Note
+  - [x] Sign up / Login
+  - [ ] Seach profile other user
+  - [ ] Bookmark
+
+### Web client
+### Mobile client
+### Desktop client
