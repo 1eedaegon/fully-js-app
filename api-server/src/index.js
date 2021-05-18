@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import helmet from "helmet";
+import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 
 import db from "./db.js";
@@ -21,8 +23,11 @@ const getUser = (token) => {
     }
   }
 };
-const app = express();
 db.connect(DB_CONN);
+const app = express();
+app.use(helmet());
+app.use(cors());
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,

@@ -52,12 +52,12 @@ export default {
       const user = await models.User.create({
         username,
         email,
-        password: hashed,
         avatar,
+        password: hashed,
       });
       return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       throw new Error("[ERROR]: Creating account.");
     }
   },
@@ -73,5 +73,30 @@ export default {
       throw new Error("[ERROR]: Fail signed in.");
     }
     return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  },
+  toggleFavorite: async (parent, { id }, { models, user }) => {
+    if (!user) {
+      throw new Error("[ERROR]: User not found.");
+    }
+    const note = await models.Note.findById(id);
+    const hasUser = note.favoritedBy.indexOf(user.id);
+    if (hasUser >= 0) {
+      return await models.Note.findByIdAndUpdate(
+        id,
+        {
+          $pull: { favoritedBy: mongoose.Types.ObjectId(user.id) },
+          $inc: { favoriteCount: -1 },
+        },
+        { new: true }
+      );
+    }
+    return await models.Note.findByIdAndUpdate(
+      id,
+      {
+        $push: { favoritedBy: mongoose.Types.ObjectId(user.id) },
+        $inc: { favoriteCount: 1 },
+      },
+      { new: true }
+    );
   },
 };

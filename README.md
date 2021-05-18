@@ -7,7 +7,7 @@
   - [ ] Read other Note
   - [x] Sign up / Login
   - [ ] Seach profile other user
-  - [ ] Bookmark
+  - [x] Bookmark
 
 ### Web client
 ### Mobile client

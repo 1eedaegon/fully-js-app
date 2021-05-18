@@ -3,7 +3,7 @@ export default {
   connect: (CONN_URI) => {
     mongoose.set("useNewUrlParser", true);
     mongoose.set("useFindAndModify", false);
-    mongoose.set("useCreateIndex", true);
+    mongoose.set("useCreateIndex", true); 
     mongoose.set("useUnifiedTopology", true);
     mongoose.connect(CONN_URI);
     mongoose.connection.on("error", (err) => {
