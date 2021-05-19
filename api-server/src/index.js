@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import helmet from "helmet";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
+import depthLimit from "graphql-depth-limit";
+import { createComplexityLimitRule } from "graphql-validation-complexity";
 
 import db from "./db.js";
 import models from "./models/index.js";
@@ -14,10 +16,10 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const DB_CONN = process.env.DB_CONN || process.env.DB_HOST;
 
-const getUser = (token) => {
+const getUser = async (token) => {
   if (token) {
     try {
-      return jwt.verify(token, process.env.JWT_SECRET);
+      return await jwt.verify(token, process.env.JWT_SECRET);
     } catch (err) {
       throw new Error("[ERROR]: Session invalid.");
     }
@@ -25,17 +27,34 @@ const getUser = (token) => {
 };
 db.connect(DB_CONN);
 const app = express();
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "data:",
+          "localhost",
+          "fonts.googleapis.com",
+          "fonts.gstatic.com",
+          "cdn.jsdelivr.net",
+        ],
+      },
+    },
+  })
+);
 app.use(cors());
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  validationRules: [depthLimit(5), createComplexityLimitRule(1000)],
   // Make context how resolvers refer to models
   // Must be *Object lieteral*
-  context: ({ req }) => {
+  context: async ({ req }) => {
     const token = req.headers.authorization;
-    const user = getUser(token);
+    const user = await getUser(token);
     return { models, user };
   },
 });

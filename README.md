@@ -4,10 +4,12 @@
 
 ### Server
   - [x] Note CRUD each user
-  - [ ] Read other Note
+  - [x] Read other Note
   - [x] Sign up / Login
-  - [ ] Seach profile other user
+  - [x] Seach profile other user
   - [x] Bookmark
+  - [x] Pagenation
+  - [x] Data limit
 
 ### Web client
 ### Mobile client
