@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Header from "./header";
-import Navigation from "./navigation";
+import Header from "./Header";
+import Navigation from "./Navigation";
 
 const Wrapper = styled.div`
   @media (min-width: 700px) {

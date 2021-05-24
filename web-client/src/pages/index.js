@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./home";
-import Favorites from "./favorites";
-import MyNotes from "./mynotes";
-import Layout from "../components/layout";
+import Home from "./Home";
+import Favorites from "./Favorite";
+import MyNotes from "./MyNotes";
+import Layout from "../components/Layout";
 
 const Pages = () => {
   return (
