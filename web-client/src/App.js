@@ -2,7 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import GlobalStyle from "./components/GlobalStyle";
 import Pages from "./pages";
 
-const uri = process.env.API_URI;
+const uri = process.env.REACT_APP_API_URI;
 const cache = new InMemoryCache();
 const client = new ApolloClient({
   uri,
@@ -13,10 +13,8 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <GlobalStyle />
-        <Pages />
-      </div>
+      <GlobalStyle />
+      <Pages />
     </ApolloProvider>
   );
 };
