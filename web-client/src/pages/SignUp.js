@@ -1,32 +1,38 @@
-import { useEffect } from "react";
+import gql from "graphql-tag";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../components/Button";
+import Form from "../components/Form";
 
-const Wrapper = styled.div`
+// Return JsonWebToken string separated by 3dots
+const SIGNUP_USER = gql`
+  mutation SignUp($username: String, $email: String, $password: String) {
+    signUp(username: $username, email: $email, password: $password)
+  }
+`;
+
+const HomeWrapper = styled.div`
   border: 1px solid #f5f4f0;
   max-width: 500px;
   padding: 1em;
   margin: 0 auto;
 `;
 
-const Form = styled.form`
-  label,
-  input {
-    display: block;
-    line-height: 2em;
-  }
-  input {
-    width: 100%;
-    margin-bottom: 1em;
-  }
-`;
-
 const SignUp = (props) => {
+  const [values, setValues] = useState();
+  const onChange = (evt) => {
+    setValues({
+      ...values,
+      [evt.target.name]: evt.target.value,
+    });
+  };
+
   useEffect(() => {
     document.title = "Sign Up - Note app";
   });
+
   return (
-    <Wrapper>
+    <HomeWrapper>
       <Form>
         <label for="username">Username:</label>
         <input
@@ -35,6 +41,7 @@ const SignUp = (props) => {
           id="username"
           name="username"
           placeholder="Name"
+          onChange={onChange}
         />
         <label for="email">E-mail:</label>
         <input
@@ -43,6 +50,7 @@ const SignUp = (props) => {
           id="email"
           name="email"
           placeholder="e-mail"
+          onChange={onChange}
         />
         <label for="password">Password</label>
         <input
@@ -51,10 +59,11 @@ const SignUp = (props) => {
           id="password"
           name="password"
           placeholder="Password"
+          onChange={onChange}
         />
         <Button type="submit">Submit</Button>
       </Form>
-    </Wrapper>
+    </HomeWrapper>
   );
 };
 export default SignUp;
