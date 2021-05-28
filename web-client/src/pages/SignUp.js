@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -6,7 +7,7 @@ import Form from "../components/Form";
 
 // Return JsonWebToken string separated by 3dots
 const SIGNUP_USER = gql`
-  mutation SignUp($username: String, $email: String, $password: String) {
+  mutation SignUp($username: String!, $email: String!, $password: String!) {
     signUp(username: $username, email: $email, password: $password)
   }
 `;
@@ -19,6 +20,7 @@ const HomeWrapper = styled.div`
 `;
 
 const SignUp = (props) => {
+  // States
   const [values, setValues] = useState();
   const onChange = (evt) => {
     setValues({
@@ -26,15 +28,30 @@ const SignUp = (props) => {
       [evt.target.name]: evt.target.value,
     });
   };
-
   useEffect(() => {
     document.title = "Sign Up - Note app";
   });
-
+  const [signUp, { error, loading }] = useMutation(SIGNUP_USER, {
+    onCompleted: (data) => {
+      localStorage.setItem("token", data.signUp);
+      props.history.push("/");
+    },
+  });
+  // Event handler
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    try {
+      signUp({ variables: { ...values } });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  // Components
   return (
     <HomeWrapper>
-      <Form>
-        <label for="username">Username:</label>
+      <h2>Sign up</h2>
+      <Form onSubmit={handleSubmit}>
+        <label htmlFor="username">Username:</label>
         <input
           required
           type="text"
@@ -43,7 +60,7 @@ const SignUp = (props) => {
           placeholder="Name"
           onChange={onChange}
         />
-        <label for="email">E-mail:</label>
+        <label htmlFor="email">E-mail:</label>
         <input
           required
           type="email"
@@ -52,7 +69,7 @@ const SignUp = (props) => {
           placeholder="e-mail"
           onChange={onChange}
         />
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input
           required
           type="password"
