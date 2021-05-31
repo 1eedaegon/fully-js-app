@@ -63,7 +63,7 @@ export default {
   },
   signIn: async (parent, { username, email, password }, { models }) => {
     email = email.trim().toLowerCase();
-    const user = await models.User.findOne({ $and: [{ email }, { username }] });
+    const user = await models.User.findOne({ $or: [{ email }, { username }] });
 
     if (!user) {
       throw new Error("[ERROR]: User not found.");

@@ -1,22 +1,18 @@
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { useEffect } from "react";
-
 import { IS_LOGGED_IN } from "../cache";
 import UserForm from "../components/UserForm";
-import { SIGNUP_USER } from "../gql/mutation";
+import { SIGNIN_USER } from "../gql/mutation";
 
-// Return JsonWebToken string separated by 3dots
-const SignUp = (props) => {
-  // States
+const SignIn = (props) => {
   useEffect(() => {
-    document.title = "Sign Up - Note app";
+    document.title = "Sign in - Note app";
   });
 
-  // Sign up mutation
-  const [signUp, { client, error, loading }] = useMutation(SIGNUP_USER, {
+  const [signIn, { client, loading, error }] = useMutation(SIGNIN_USER, {
     onCompleted: (data) => {
-      localStorage.setItem("token", data.signUp);
+      localStorage.setItem("token", data.signIn);
       client.writeQuery({
         query: IS_LOGGED_IN,
         data: !!localStorage.getItem("token"),
@@ -24,13 +20,12 @@ const SignUp = (props) => {
       props.history.push("/");
     },
   });
-  // Components
   return (
     <>
-      <UserForm action={signUp} formType="signup" />
+      <UserForm action={signIn} formType="signin" />
       {loading && <p>Now loading...</p>}
-      {error && <p>Error creating an account</p>}
+      {error && <p>Sign in error!</p>}
     </>
   );
 };
-export default SignUp;
+export default SignIn;
