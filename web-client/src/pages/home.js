@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
 import Button from "../components/Button";
+import Loading from "../components/Loading";
 
 import NoteFeed from "../components/NoteFeed";
 import { GET_NOTES } from "../gql/query";
@@ -8,7 +8,7 @@ import { GET_NOTES } from "../gql/query";
 const Home = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
   // const getNextPage;
-  if (loading) return <p>Now loading....</p>;
+  if (loading) return <Loading />;
   if (error) return <p>Error!</p>;
   return (
     <>

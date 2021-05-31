@@ -1,9 +1,9 @@
 import { useMutation } from "@apollo/client";
-import gql from "graphql-tag";
 import { useEffect } from "react";
-import { IS_LOGGED_IN } from "../cache";
+import Loading from "../components/Loading";
 import UserForm from "../components/UserForm";
 import { SIGNIN_USER } from "../gql/mutation";
+import { IS_LOGGED_IN } from "../gql/query";
 
 const SignIn = (props) => {
   useEffect(() => {
@@ -23,7 +23,7 @@ const SignIn = (props) => {
   return (
     <>
       <UserForm action={signIn} formType="signin" />
-      {loading && <p>Now loading...</p>}
+      {loading && <Loading />}
       {error && <p>Sign in error!</p>}
     </>
   );

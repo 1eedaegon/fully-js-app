@@ -1,4 +1,5 @@
-import { gql, InMemoryCache, makeVar } from "@apollo/client";
+import { InMemoryCache, makeVar } from "@apollo/client";
+
 // Reactive variable
 export const isLoggedInVar = makeVar(!!localStorage.getItem("token"));
 // Set cache using reactive variable
@@ -15,4 +16,3 @@ export const cache = new InMemoryCache({
     },
   },
 });
-

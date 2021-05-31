@@ -15,6 +15,7 @@ const TextAria = styled.textarea`
 const NoteForm = (props) => {
   // States
   const [value, setValue] = useState({ content: props.content || "" });
+
   // Handler
   const onChange = (event) => {
     setValue({

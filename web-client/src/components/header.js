@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { IS_LOGGED_IN } from "../cache";
+import { IS_LOGGED_IN } from "../gql/query";
 import logo from "../img/logo.svg";
 import ButtonAsLink from "./ButtonAsLink";
 

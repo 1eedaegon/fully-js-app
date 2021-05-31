@@ -18,7 +18,7 @@ export default gql`
     email: String!
     avatar: String
     notes: [Note]!
-    favorites: [Note!]!
+    favorites: [Note]!
   }
   type NoteFeed {
     notes: [Note]!

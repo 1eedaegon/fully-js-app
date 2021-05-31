@@ -1,14 +1,17 @@
+import mongoose from "mongoose";
 export default {
   Hello: () => "Hello world!",
   notes: async (parent, args, { models }) => await models.Note.find().limit(10),
-  note: async (parent, args, { models }) => await models.Note.findById(args.id),
+  note: async (parent, args, { models }) => {
+    return await models.Note.findById(mongoose.Types.ObjectId(args.id));
+  },
   user: async (parent, { username }, { models }) =>
     await models.User.findOne({ username }),
   users: async (parent, args, { models }) =>
     await models.User.find({}).limit(10),
   // user is request parameter for authorization with token, Is not User entity
   me: async (parent, args, { models, user }) =>
-    await models.User.findById(user.id),
+    await models.User.findById(mongoose.Types.ObjectId(user.id)),
   noteFeed: async (parent, { cursor }, { models }) => {
     const cursorLimit = 10;
     let hasNextPage = false;

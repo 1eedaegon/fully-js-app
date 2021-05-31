@@ -1,10 +1,10 @@
 import { useMutation } from "@apollo/client";
-import gql from "graphql-tag";
 import { useEffect } from "react";
+import Loading from "../components/Loading";
 
-import { IS_LOGGED_IN } from "../cache";
 import UserForm from "../components/UserForm";
 import { SIGNUP_USER } from "../gql/mutation";
+import { IS_LOGGED_IN } from "../gql/query";
 
 // Return JsonWebToken string separated by 3dots
 const SignUp = (props) => {
@@ -28,7 +28,7 @@ const SignUp = (props) => {
   return (
     <>
       <UserForm action={signUp} formType="signup" />
-      {loading && <p>Now loading...</p>}
+      {loading && <Loading />}
       {error && <p>Error creating an account</p>}
     </>
   );

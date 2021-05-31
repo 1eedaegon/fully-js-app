@@ -2,13 +2,11 @@ import {
   ApolloClient,
   ApolloProvider,
   createHttpLink,
-  gql,
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { IS_LOGGED_IN } from "./cache";
 import GlobalStyle from "./components/GlobalStyle";
-// import { cache } from "./cache";
+import { typeDefs, IS_LOGGED_IN } from "./gql/query";
 import Pages from "./pages";
 
 const uri = process.env.REACT_APP_API_URI;
@@ -22,11 +20,6 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-const typeDefs = gql`
-  extend type query {
-    isLoggedIn: Boolean!
-  }
-`;
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),

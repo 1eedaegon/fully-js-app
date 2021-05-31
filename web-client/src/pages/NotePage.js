@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
+import ErrorText from "../components/Error";
+import Loading from "../components/Loading";
 import Note from "../components/Note";
 import { GET_NOTE } from "../gql/query";
 
@@ -8,8 +9,8 @@ const NotePage = (props) => {
   const { data, loading, error } = useQuery(GET_NOTE, {
     variables: { id },
   });
-  if (loading) return <p>Now loading...</p>;
-  if (error) return <p>Umm... something error: {error}</p>;
+  if (loading) return <Loading />;
+  if (error) return <ErrorText>{error}</ErrorText>;
   return <Note note={data.note} />;
 };
 export default NotePage;
