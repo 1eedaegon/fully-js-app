@@ -7,14 +7,14 @@ import {
 import Home from "./Home";
 import Favorites from "./Favorites";
 import MyNotes from "./MyNotes";
-import Layout from "../components/Layout";
+import Layout from "../Components/Layout";
 import NotePage from "./NotePage";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import { useQuery } from "@apollo/client";
 import NewNote from "./New";
 import { IS_LOGGED_IN } from "../gql/query";
-import Loading from "../components/Loading";
+import Loading from "../Components/Loading";
 import EditPage from "./EditPage";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

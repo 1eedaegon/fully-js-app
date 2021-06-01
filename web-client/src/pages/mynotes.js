@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
-import ErrorText from "../components/Error";
-import Loading from "../components/Loading";
-import NoteFeed from "../components/NoteFeed";
+import ErrorText from "../Components/Error";
+import Loading from "../Components/Loading";
+import NoteFeed from "../Components/NoteFeed";
 import { GET_MY_NOTES } from "../gql/query";
 
 const MyNotes = () => {

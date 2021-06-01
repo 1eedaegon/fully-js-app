@@ -5,9 +5,9 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import GlobalStyle from "./components/GlobalStyle";
+import GlobalStyle from "./Components/GlobalStyle";
 import { typeDefs, IS_LOGGED_IN } from "./gql/query";
-import Pages from "./pages";
+import Pages from "./Pages";
 
 const uri = process.env.REACT_APP_API_URI;
 const cache = new InMemoryCache({});

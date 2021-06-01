@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
-import Button from "../components/Button";
-import Loading from "../components/Loading";
+import Button from "../Components/Button";
+import Loading from "../Components/Loading";
 
-import NoteFeed from "../components/NoteFeed";
+import NoteFeed from "../Components/NoteFeed";
 import { GET_NOTES } from "../gql/query";
 
 const Home = () => {

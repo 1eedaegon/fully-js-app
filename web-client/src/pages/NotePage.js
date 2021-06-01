@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
-import ErrorText from "../components/Error";
-import Loading from "../components/Loading";
-import Note from "../components/Note";
+import ErrorText from "../Components/Error";
+import Loading from "../Components/Loading";
+import Note from "../Components/Note";
 import { GET_NOTE } from "../gql/query";
 
 const NotePage = (props) => {

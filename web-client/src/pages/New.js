@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { useEffect } from "react";
-import Loading from "../components/Loading";
-import NoteForm from "../components/NoteForm";
+import Loading from "../Components/Loading";
+import NoteForm from "../Components/NoteForm";
 import { NEW_NOTE } from "../gql/mutation";
 import { GET_MY_NOTES, GET_NOTES } from "../gql/query";
 

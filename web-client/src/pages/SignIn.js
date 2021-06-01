@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { useEffect } from "react";
-import Loading from "../components/Loading";
-import UserForm from "../components/UserForm";
+import Loading from "../Components/Loading";
+import UserForm from "../Components/UserForm";
 import { SIGNIN_USER } from "../gql/mutation";
 import { IS_LOGGED_IN } from "../gql/query";
 

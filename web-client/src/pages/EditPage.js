@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
-import ErrorText from "../components/Error";
-import Loading from "../components/Loading";
-import NoteForm from "../components/NoteForm";
+import ErrorText from "../Components/Error";
+import Loading from "../Components/Loading";
+import NoteForm from "../Components/NoteForm";
 import { EDIT_NOTE } from "../gql/mutation";
 
 import { GET_ME, GET_NOTE } from "../gql/query";
