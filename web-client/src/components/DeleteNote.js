@@ -1,3 +1,4 @@
+import React from "react";
 import { useMutation } from "@apollo/client";
 import { withRouter } from "react-router";
 import { DELETE_NOTE } from "../gql/mutation";

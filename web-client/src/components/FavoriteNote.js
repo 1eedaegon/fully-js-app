@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { TOGGLE_FAVORITE } from "../gql/mutation";
