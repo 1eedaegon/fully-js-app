@@ -10,7 +10,6 @@ const MyNotes = () => {
     document.title = "My notes - Note App";
   });
   const { loading, error, data } = useQuery(GET_MY_NOTES);
-  console.log(data);
   if (loading) return <Loading />;
   if (error) return <ErrorText>{error}</ErrorText>;
   if (data.me.notes.length !== 0) return <NoteFeed notes={data.me.notes} />;

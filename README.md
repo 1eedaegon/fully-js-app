@@ -14,9 +14,9 @@
 ### Web client
   - [x] Note CRUD each user
   - [x] Read other Note
-  - [ ] Sign up / Login
-  - [ ] Seach profile other user
-  - [ ] Bookmark
+  - [x] Sign up / Login
+  - [x] Seach profile other user
+  - [x] Bookmark
 
 ### Mobile client
   - [ ] Note CRUD each user
